@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/icons/calculator-icon.svg">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <main>
+        <div class="calculator">
+            <section class="results-section">
+                <span id="result">0</span>
+                <div class="results-section__bottom">
+                    <span id="historic-icon" role="button">
+                        <img src="./images/icons/clock-rewind-icon.svg" alt="icone do historico">
+                    </span>
+                    <span id="delete-btn" role="button">
+                        <img src="./images/icons/delete-icon.svg" alt="icone para deletar">
+                    </span>
+                </div>
+            </section>
+            <table>
+                <tbody class="btns-table">
+                    <tr class="btns-table__row">
+                        <td><button class="btn" id="clear-all">AC</button></td>
+                        <td><button class="btn" id="reverse">+/-</button></td>
+                        <td><button class="btn" data-operator="%">%</button></td>
+                        <td><button class="btn" data-operator="/">÷</button></td>
+                    </tr>
+                    <tr class="btns-table__row">
+                        <td><button class="btn" data-num="7">7</button></td>
+                        <td><button class="btn" data-num="8">8</button></td>
+                        <td><button class="btn" data-num="9">9</button></td>
+                        <td><button class="btn" data-operator="X">X</button></td>
+                    </tr>
+                    <tr class="btns-table__row">
+                        <td><button class="btn" data-num="4">4</button></td>
+                        <td><button class="btn" data-num="5">5</button></td>
+                        <td><button class="btn" data-num="6">6</button></td>
+                        <td><button class="btn" data-operator="-">-</button></td>
+                    </tr>
+                    <tr class="btns-table__row">
+                        <td><button class="btn" data-num="1">1</button></td>
+                        <td><button class="btn" data-num="2">2</button></td>
+                        <td><button class="btn" data-num="3">3</button></td>
+                        <td><button class="btn" data-operator="+">+</button></td>
+                    </tr>
+                    <tr class="btns-table__row">
+                        <td><button class="btn" id="float-btn">.</button></td>
+                        <td><button class="btn" data-num="0">0</button></td>
+                        <td><button class="btn" id="equal-btn">=</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script src="./js/main.js"></script>
+</body>
+</html>
