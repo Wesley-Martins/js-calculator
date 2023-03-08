@@ -5,21 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./images/icons/calculator-icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Calculator</title>
 </head>
 <body>
     <main>
         <div class="calculator">
             <section class="results-section">
-                <span id="result">0</span>
+                <div id="result">0</div>
                 <div class="results-section__bottom">
-                    <span id="historic-icon" role="button">
+                    <button id="historic-btn">
                         <img src="./images/icons/clock-rewind-icon.svg" alt="icone do historico">
-                    </span>
-                    <span id="delete-btn" role="button">
+                    </button>
+                    <button id="delete-btn">
                         <img src="./images/icons/delete-icon.svg" alt="icone para deletar">
-                    </span>
+                    </button>
                 </div>
             </section>
             <table>
@@ -34,7 +38,7 @@
                         <td><button class="btn" data-num="7">7</button></td>
                         <td><button class="btn" data-num="8">8</button></td>
                         <td><button class="btn" data-num="9">9</button></td>
-                        <td><button class="btn" data-operator="X">X</button></td>
+                        <td><button class="btn" data-operator="x">x</button></td>
                     </tr>
                     <tr class="btns-table__row">
                         <td><button class="btn" data-num="4">4</button></td>

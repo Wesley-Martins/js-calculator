@@ -1,0 +1,88 @@
+@import "../abstract/vars";
+
+main {
+    align-items: center;
+    background: $color-primary;
+    display: grid;
+    font-family: $font-principal;
+    min-height: 100vh;
+    padding: 5px;
+}
+
+.calculator {
+    background: $color-secondary;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 0.5fr 1fr;
+    margin: 0 auto;
+    height: 500px;
+    padding: 10px;
+    width: 400px;
+    @media (max-width: 400px) {
+        width: 100%;
+    }
+
+    .results-section {
+        border-bottom: 1px solid black;
+        display: grid;
+        grid-template-rows: 1fr 50px;
+
+        #result {
+            align-items: end;
+            display: grid;
+            font-size: 2rem;
+            padding: 10px;
+            text-align: right;
+        }
+        &__bottom {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            #historic-btn,
+            #delete-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+    table {
+        height: 100%;
+    }
+    .btns-table {
+        display: grid;
+        height: 100%;
+
+        &__row {
+            align-items: center;
+            column-gap: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        td {
+            flex-basis: 100%;
+        }
+        .btn {
+            background: $color-primary;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 3px 3px black;
+            color: $color-terciary;
+            cursor: pointer;
+            height: 45px;
+            width: 100%;
+            &:active {
+                box-shadow: none;
+                transform: translate(3px, 3px);
+            }
+            &:focus-visible {
+                outline: 1px solid $color-terciary;
+            }
+        }
+        #clear-all {
+            color: rgb(188, 40, 40);
+        }
+    }
+}
