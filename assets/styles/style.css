@@ -27,7 +27,7 @@ main {
   display: grid;
   grid-template-rows: 1fr 50px;
 }
-.calculator .results-section #result {
+.calculator .results-section #total {
   align-items: end;
   display: grid;
   font-size: 2rem;
