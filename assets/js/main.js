@@ -3,22 +3,34 @@ const operatorBtns = document.querySelectorAll("[data-operator]");
 const numberBtns = document.querySelectorAll("[data-num]");
 const clearAllBtn = document.getElementById("clear-all");
 const clearDigitBtn = document.getElementById("delete-btn");
+const equalBtn = document.getElementById("equal-btn");
 const total = document.getElementById("total");
 
 var firstNumber = "";
 var secondNumber = "";
 var innerOperators = "";
+var generatedResult = "";
+
+function removeLastDigit(element) {
+    return element.slice(0, -1)
+} 
 
 function addNumber(numberBtn) {
     const number = numberBtn.getAttribute("data-num");
-    total.innerHTML += number; 
+
+    if(generatedResult != "") {
+        generatedResult = "";
+        total.innerHTML = number;
+    }
+    else{ total.innerHTML += number; }
+     
 
     for(let i = 0; i < operatorsList.length; i++) {
+        
         if(total.innerHTML.includes(operatorsList[i])) {
-
             secondNumber += number;
-            return
 
+            return
         }
     }
 
@@ -35,8 +47,8 @@ function addOperator(operatorBtn) {
         switch(lastDigit) {
             case "-":
             case "+":
-                innerOperators = innerOperators.slice(0, -1) + operator;
-                total.innerHTML = total.innerHTML.slice(0, -1) + operator;
+                innerOperators = removeLastDigit(innerOperators) + operator;
+                total.innerHTML = removeLastDigit(total.innerHTML) + operator;
                 break
 
             case "÷":
@@ -46,8 +58,8 @@ function addOperator(operatorBtn) {
                     total.innerHTML += operator;
                 }
                 else {
-                    innerOperators = innerOperators.slice(0, -1) + operator; 
-                    total.innerHTML = total.innerHTML.slice(0, -1) + operator;
+                    innerOperators = removeLastDigit(innerOperators) + operator; 
+                    total.innerHTML = removeLastDigit(total.innerHTML) + operator;
                 }
                 break
 
@@ -71,24 +83,45 @@ function clearDigit() {
     total.innerHTML = total.innerHTML.slice(0, -1);
 
     if(innerOperators.endsWith(lastDigit)) {
-        innerOperators = innerOperators.slice(0, -1);
+        innerOperators = removeLastDigit(innerOperators);
         return
     } else if (secondNumber.endsWith(lastDigit)) {
-        secondNumber = secondNumber.slice(0, -1);
+        secondNumber = removeLastDigit(secondNumber);
         return
     }
     else if (firstNumber.endsWith(lastDigit)) { 
-        firstNumber = firstNumber.slice(0, -1) 
+        firstNumber = removeLastDigit(firstNumber); 
     }  
 }
 
-/*function generateResult() {
+function generateResult() {
+    num1 = parseInt(firstNumber);
+    num2 = parseInt(secondNumber);
+    const operator = innerOperators;
+
     if(innerOperators.length === 1) {
-        switch(innerOperators) {
-            case "-"
+        if(secondNumber === "") { 
+            return
         }
+        //Limpa todas as variáveis para o uso na próxima operação
+        clearAll()
+
+        switch(operator) {
+            case "+":
+                generatedResult = num1 + num2;
+                break
+            case "-":
+                generatedResult = num1 - num2;
+                break
+            case "x":
+                generatedResult = num1 * num2;
+                break
+            case "÷":
+                generatedResult = num1 / num2;
+        }
+        total.innerHTML = generatedResult;
     }
-}*/
+}
 
 for(let i = 0; i < numberBtns.length; i++) {
     numberBtns[i].addEventListener('click', function() { addNumber(numberBtns[i]) })
@@ -100,3 +133,4 @@ for(let i = 0; i < operatorBtns.length; i++) {
 
 clearAllBtn.onclick = clearAll;
 clearDigitBtn.onclick = clearDigit;
+equalBtn.onclick = generateResult;
