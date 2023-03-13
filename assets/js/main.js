@@ -1,6 +1,7 @@
 const operatorsList = ["-", "+", "÷", "x", "%"]
 const operatorBtns = document.querySelectorAll("[data-operator]");
 const numberBtns = document.querySelectorAll("[data-num]");
+const pointBtn = document.getElementById("float-btn");
 const clearAllBtn = document.getElementById("clear-all");
 const clearDigitBtn = document.getElementById("delete-btn");
 const equalBtn = document.getElementById("equal-btn");
@@ -9,7 +10,7 @@ const total = document.getElementById("total");
 var firstNumber = "";
 var secondNumber = "";
 var innerOperators = "";
-var generatedResult = "";
+var generatedResult = null;
 
 function removeLastDigit(element) {
     return element.slice(0, -1)
@@ -18,15 +19,19 @@ function removeLastDigit(element) {
 function addNumber(numberBtn) {
     const number = numberBtn.getAttribute("data-num");
 
-    if(generatedResult != "") {
-        generatedResult = "";
-        total.innerHTML = number;
+    if(generatedResult) {
+        if(total.innerHTML[total.innerHTML.length - 1] === innerOperators) {
+            firstNumber = generatedResult;
+        }
+        else {
+            total.innerHTML = "";
+        }
+        generatedResult = null; 
     }
-    else{ total.innerHTML += number; }
-     
 
+    total.innerHTML += number;
+     
     for(let i = 0; i < operatorsList.length; i++) {
-        
         if(total.innerHTML.includes(operatorsList[i])) {
             secondNumber += number;
 
@@ -34,7 +39,7 @@ function addNumber(numberBtn) {
         }
     }
 
-    firstNumber += number 
+    firstNumber += number;
 }
 
 function addOperator(operatorBtn) {
@@ -70,6 +75,28 @@ function addOperator(operatorBtn) {
     }  
 }
 
+function addPoint() {
+    lastDigit = total.innerHTML[total.innerHTML.length - 1];
+
+    switch(lastDigit) {
+        case secondNumber[secondNumber.length -1]:
+            secondNumber += ".";
+            break
+        case firstNumber[firstNumber.length - 1]:
+            firstNumber += ".";
+            break
+        case generatedResult[generatedResult.length - 1]:
+            generatedResult += ".";
+            break
+
+        default: 
+        if(total.innerHTML === "" || total.innerHTML.endsWith(innerOperators[innerOperators.length - 1])) {
+            return
+        } 
+    }
+    total.innerHTML += ".";
+}
+
 function clearAll() {
     firstNumber = "";
     secondNumber = "";
@@ -77,34 +104,36 @@ function clearAll() {
     total.innerHTML = "";
 }
 
-function clearDigit() {
+function clearLastDigit() {
     const lastDigit = total.innerHTML[total.innerHTML.length - 1];
 
-    total.innerHTML = total.innerHTML.slice(0, -1);
+    total.innerHTML = removeLastDigit(total.innerHTML);
 
-    if(innerOperators.endsWith(lastDigit)) {
-        innerOperators = removeLastDigit(innerOperators);
-        return
-    } else if (secondNumber.endsWith(lastDigit)) {
-        secondNumber = removeLastDigit(secondNumber);
-        return
+    switch(lastDigit) {
+        case innerOperators[innerOperators.length - 1]:
+            innerOperators = removeLastDigit(innerOperators);
+            break
+
+        case secondNumber[secondNumber.length - 1]:
+            secondNumber = removeLastDigit(secondNumber);
+            break
+
+        case firstNumber[firstNumber.length -1]:
+            firstNumber = removeLastDigit(firstNumber);
+            break
+        
+        default: if(generatedResult) { 
+            generatedResult = removeLastDigit(`${generatedResult}`); 
+        }
     }
-    else if (firstNumber.endsWith(lastDigit)) { 
-        firstNumber = removeLastDigit(firstNumber); 
-    }  
 }
 
 function generateResult() {
-    num1 = parseInt(firstNumber);
-    num2 = parseInt(secondNumber);
-    const operator = innerOperators;
+    if(innerOperators.length === 1 && secondNumber != "") {
 
-    if(innerOperators.length === 1) {
-        if(secondNumber === "") { 
-            return
-        }
-        //Limpa todas as variáveis para o uso na próxima operação
-        clearAll()
+        num1 = parseFloat(firstNumber);
+        num2 = parseFloat(secondNumber);
+        const operator = innerOperators;
 
         switch(operator) {
             case "+":
@@ -119,8 +148,14 @@ function generateResult() {
             case "÷":
                 generatedResult = num1 / num2;
         }
-        total.innerHTML = generatedResult;
     }
+    else if (innerOperators.length > 1) {
+        generatedResult = eval(total.innerHTML.replace(/x/g, "*").replace(/÷/g, "/"));
+    }
+
+    //Limpa todas as variáveis para o uso na próxima operação
+    clearAll();
+    total.innerHTML = generatedResult;
 }
 
 for(let i = 0; i < numberBtns.length; i++) {
@@ -132,5 +167,6 @@ for(let i = 0; i < operatorBtns.length; i++) {
 }
 
 clearAllBtn.onclick = clearAll;
-clearDigitBtn.onclick = clearDigit;
+clearDigitBtn.onclick = clearLastDigit;
+pointBtn.onclick = addPoint;
 equalBtn.onclick = generateResult;
