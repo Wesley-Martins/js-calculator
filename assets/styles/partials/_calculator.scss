@@ -15,10 +15,10 @@ main {
     display: grid;
     grid-template-rows: 0.5fr 1fr;
     margin: 0 auto;
-    height: 500px;
+    height: 510px;
     padding: 10px;
-    width: 400px;
-    @media (max-width: 400px) {
+    width: 500px;
+    @media (max-width: 510px) {
         width: 100%;
     }
 
@@ -26,6 +26,16 @@ main {
         border-bottom: 1px solid black;
         display: grid;
         grid-template-rows: 1fr 50px;
+        position: relative;
+
+        .icon {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
 
         #total {
             align-items: end;
@@ -39,11 +49,18 @@ main {
             display: flex;
             justify-content: space-between;
 
-            #historic-btn,
-            #delete-btn {
+            button {
+                cursor: pointer;
                 background: none;
                 border: none;
-                cursor: pointer;
+                height: 25px;
+                width: 25px;
+            }
+            .historic-btn__icon {
+                background-image: url(../images/icons/clock-rewind-icon.svg);
+            }
+            .delete-btn__icon {
+                background-image: url(../images/icons/delete-icon.svg)
             }
         }
     }
@@ -57,7 +74,7 @@ main {
 
         &__row {
             align-items: center;
-            column-gap: 15px;
+            column-gap: 12px;
             display: flex;
             justify-content: space-between;
         }
@@ -71,7 +88,7 @@ main {
             box-shadow: 3px 3px black;
             color: $color-terciary;
             cursor: pointer;
-            height: 45px;
+            height: 55px;
             width: 100%;
             &:active {
                 box-shadow: none;
@@ -80,6 +97,9 @@ main {
             &:focus-visible {
                 outline: 1px solid $color-terciary;
             }
+        }
+        #equal-btn-container {
+            flex-basis: 135%;
         }
         #clear-all {
             color: rgb(188, 40, 40);

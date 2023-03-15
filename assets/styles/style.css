@@ -13,11 +13,11 @@ main {
   display: grid;
   grid-template-rows: 0.5fr 1fr;
   margin: 0 auto;
-  height: 500px;
+  height: 510px;
   padding: 10px;
-  width: 400px;
+  width: 500px;
 }
-@media (max-width: 400px) {
+@media (max-width: 510px) {
   .calculator {
     width: 100%;
   }
@@ -26,6 +26,15 @@ main {
   border-bottom: 1px solid black;
   display: grid;
   grid-template-rows: 1fr 50px;
+  position: relative;
+}
+.calculator .results-section .icon {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 .calculator .results-section #total {
   align-items: end;
@@ -39,11 +48,18 @@ main {
   display: flex;
   justify-content: space-between;
 }
-.calculator .results-section__bottom #historic-btn,
-.calculator .results-section__bottom #delete-btn {
+.calculator .results-section__bottom button {
+  cursor: pointer;
   background: none;
   border: none;
-  cursor: pointer;
+  height: 25px;
+  width: 25px;
+}
+.calculator .results-section__bottom .historic-btn__icon {
+  background-image: url(../images/icons/clock-rewind-icon.svg);
+}
+.calculator .results-section__bottom .delete-btn__icon {
+  background-image: url(../images/icons/delete-icon.svg);
 }
 .calculator table {
   height: 100%;
@@ -54,8 +70,8 @@ main {
 }
 .calculator .btns-table__row {
   align-items: center;
-  -moz-column-gap: 15px;
-       column-gap: 15px;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
   display: flex;
   justify-content: space-between;
 }
@@ -69,7 +85,7 @@ main {
   box-shadow: 3px 3px black;
   color: #47EDCB;
   cursor: pointer;
-  height: 45px;
+  height: 55px;
   width: 100%;
 }
 .calculator .btns-table .btn:active {
@@ -79,6 +95,52 @@ main {
 .calculator .btns-table .btn:focus-visible {
   outline: 1px solid #47EDCB;
 }
+.calculator .btns-table #equal-btn-container {
+  flex-basis: 135%;
+}
 .calculator .btns-table #clear-all {
   color: rgb(188, 40, 40);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.historic {
+  background-color: #110B1A;
+  border-radius: 5px;
+  display: block;
+  padding: 8px;
+  position: absolute;
+  width: 85%;
+}
+.historic__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.historic__top > * {
+  border-radius: 5px;
+  border: none;
+  background-color: whitesmoke;
+  height: 25px;
+  padding: 3px;
+  width: 25px;
+}
+.historic__clock-icon {
+  background: url(../images/icons/clock-rewind-icon.svg);
+}
+.historic__delete-icon {
+  background: url(../images/icons/garbage-delete-icon.svg);
+  cursor: pointer;
+}
+.historic__item {
+  color: whitesmoke;
+  display: flex;
+  gap: 1rem;
+  margin-top: 10px;
+}
+.historic__item .operation {
+  border: 1px solid whitesmoke;
+  padding: 2px 5px;
 }/*# sourceMappingURL=style.css.map */

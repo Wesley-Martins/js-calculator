@@ -1,0 +1,45 @@
+@import "../abstract/vars";
+
+.hidden {
+    display: none !important;
+}
+
+.historic {
+    background-color: $color-primary;
+    border-radius: 5px;
+    display: block;
+    padding: 8px;
+    position: absolute;
+    width: 85%;
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        & > * {
+            border-radius: 5px;
+            border: none;
+            background-color: whitesmoke;
+            height: 25px;
+            padding: 3px;
+            width: 25px;
+        }
+    }
+    &__clock-icon {
+        background: url(../images/icons/clock-rewind-icon.svg);
+    }
+    &__delete-icon {
+        background: url(../images/icons/garbage-delete-icon.svg);
+        cursor: pointer;
+    }
+
+    &__item {
+        color: whitesmoke;
+        display: flex;
+        gap: 1rem;
+        margin-top: 10px;
+        .operation {
+            border: 1px solid whitesmoke;
+            padding: 2px 5px;
+        }
+    }
+}

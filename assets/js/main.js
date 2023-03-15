@@ -10,21 +10,21 @@ const MAX_CHAR_LENGTH = 10;
 
 var numbersList = [];
 var operatorsList = [];
-var generatedResult = null;
+var result = null;
 
 function removeLastDigit(element) {
     return element.slice(0, -1)
 } 
 
 function addNumber(numberBtn) {
-    if(generatedResult) {
-        if(total.innerHTML[total.innerHTML.length - 1] === operatorsList ) {
-            numbersList[0] = generatedResult;
+    if(result) {
+        if(total.innerHTML.at(-1) === operatorsList ) {
+            numbersList[0] = result;
         }
         else {
             total.innerHTML = "";
         }
-        generatedResult = null; 
+        result = null; 
     }
 
     const number = numberBtn.getAttribute("data-num");
@@ -34,6 +34,10 @@ function addNumber(numberBtn) {
 
     if(cannotAdd) {
         return 
+    }
+    if(total.innerHTML.at(-1) === "%") {
+        operatorsList += "x";
+        total.innerHTML += "x";
     }
     
     total.innerHTML += number;
@@ -51,7 +55,7 @@ function addOperator(operatorBtn) {
     const operator = operatorBtn.getAttribute("data-operator");
 
     const canAdd = total.innerHTML != "" && !total.innerHTML.endsWith(operator);
-    const lastDigit = total.innerHTML[total.innerHTML.length - 1];
+    const lastDigit = total.innerHTML.at(-1);
 
     if(canAdd) {
         switch(lastDigit) {
@@ -87,25 +91,23 @@ function clearAll() {
 }
 
 function clearLastDigit() {
-    const lastDigit = total.innerHTML[total.innerHTML.length - 1];
-    const lastNumberOfList = numbersList[numbersList.length - 1];
-
+    const lastDigit = total.innerHTML.at(-1);
     total.innerHTML = removeLastDigit(total.innerHTML);
 
     switch(lastDigit) {
-        case operatorsList[operatorsList.length - 1]:
+        case operatorsList.at(-1):
             operatorsList = removeLastDigit(operatorsList);
             break;
 
-        case lastNumberOfList[lastNumberOfList.length - 1]:
-            numbersList[numbersList.length - 1] = lastNumberOfList.slice(0, -1);
-            if(numbersList[numbersList.length - 1] === "") {
-                numbersList = numbersList.slice(0, -1);
+        case numbersList.at(-1).at(-1):
+            numbersList[numbersList.length -1] = numbersList.at(-1).slice(0, -1);
+            if(numbersList.at(-1) === "") {
+                numbersList.pop();
             }
             break;
 
-        default: if(generatedResult) { 
-            generatedResult = removeLastDigit(toString(generatedResult)); 
+        default: if(result) { 
+            result = removeLastDigit(toString(result)); 
         }
     }
 }
@@ -119,38 +121,45 @@ function generateResult() {
 
         switch(operator) {
             case "+":
-                generatedResult = num1 + num2;
+                result = num1 + num2;
                 break
             case "-":
-                generatedResult = num1 - num2;
+                result = num1 - num2;
                 break
             case "x":
-                generatedResult = num1 * num2;
+                result = num1 * num2;
                 break
             case "÷":
-                generatedResult = num1 / num2;
+                result = num1 / num2;
         }
     }
     else if (operatorsList.length > 1) {
-        generatedResult = eval(total.innerHTML.replace(/x/g, "*").replace(/÷/g, "/"));
+        result = 
+        eval(total.innerHTML.replace(/x/g, "*").replace(/÷/g, "/").replace(/%/g, "/100"));
     }
 
-    if (generatedResult) {
+    if (result) {
         //Limpa todas as variáveis para o uso na próxima operação
         clearAll();
-        generatedResult = generatedResult.toFixed(6);
-        total.innerHTML = generatedResult;
+        result = result.toString().includes(".") ? result.toFixed(3) : result;
+        total.innerHTML = result;
     }
 }
 
 for(let i = 0; i < numberBtns.length; i++) {
     numberBtns[i].addEventListener('click', function() { addNumber(numberBtns[i]) })
 }
-
 for(let i = 0; i < operatorBtns.length; i++) {
     operatorBtns[i].addEventListener('click', function() { addOperator(operatorBtns[i]) })
 }
-
 clearAllBtn.onclick = clearAll;
 clearDigitBtn.onclick = clearLastDigit;
 equalBtn.onclick = generateResult;
+
+const historicBtn = document.getElementById("historic-btn");
+const historic = document.querySelector(".historic");
+
+historicBtn.addEventListener('click', () => {
+    console.log("oi?")
+    historic.classList.toggle("hidden");
+})

@@ -16,46 +16,65 @@
     <main>
         <div class="calculator">
             <section class="results-section">
+                <div class="historic hidden">
+                    <div class="historic__top">
+                        <div>
+                            <i class="historic__clock-icon  icon"></i>
+                        </div>
+                        <button>
+                            <i class="historic__delete-icon icon"></i>
+                        </button>
+                    </div>
+                    <ul class="historic__list">
+                        <li class="historic__item">
+                            <div class="operation">35+40</div>
+                            =
+                            <div class="operation">75</div>
+                        </li>
+                        <li class="historic__item">
+                            <div class="operation">35+40</div>
+                            =
+                            <div class="operation">75</div>
+                        </li>
+                    </ul>
+                </div>
                 <div id="total"></div>
                 <div class="results-section__bottom">
                     <button id="historic-btn">
-                        <img src="./images/icons/clock-rewind-icon.svg" alt="icone do historico">
+                        <i class="historic-btn__icon icon"></i>
                     </button>
                     <button id="delete-btn">
-                        <img src="./images/icons/delete-icon.svg" alt="icone para deletar">
+                        <i class="delete-btn__icon icon"></i>
                     </button>
                 </div>
             </section>
             <table>
                 <tbody class="btns-table">
                     <tr class="btns-table__row">
-                        <td><button class="btn" id="clear-all">AC</button></td>
-                        <td><button class="btn" id="reverse">+/-</button></td>
-                        <td><button class="btn" data-operator="%">%</button></td>
-                        <td><button class="btn" data-operator="÷">÷</button></td>
-                    </tr>
-                    <tr class="btns-table__row">
                         <td><button class="btn" data-num="7">7</button></td>
                         <td><button class="btn" data-num="8">8</button></td>
                         <td><button class="btn" data-num="9">9</button></td>
                         <td><button class="btn" data-operator="x">x</button></td>
+                        <td><button class="btn" id="clear-all">AC</button></td>
                     </tr>
                     <tr class="btns-table__row">
                         <td><button class="btn" data-num="4">4</button></td>
                         <td><button class="btn" data-num="5">5</button></td>
                         <td><button class="btn" data-num="6">6</button></td>
                         <td><button class="btn" data-operator="-">-</button></td>
+                        <td><button class="btn" data-operator="%">%</button></td>
                     </tr>
                     <tr class="btns-table__row">
                         <td><button class="btn" data-num="1">1</button></td>
                         <td><button class="btn" data-num="2">2</button></td>
                         <td><button class="btn" data-num="3">3</button></td>
                         <td><button class="btn" data-operator="+">+</button></td>
+                        <td><button class="btn" data-operator="÷">÷</button></td>
                     </tr>
                     <tr class="btns-table__row">
-                        <td><button class="btn" data-num=".">.</button></td>
                         <td><button class="btn" data-num="0">0</button></td>
-                        <td><button class="btn" id="equal-btn">=</button></td>
+                        <td><button class="btn" data-num=".">.</button></td>
+                        <td id="equal-btn-container"><button class="btn" id="equal-btn">=</button></td>
                     </tr>
                 </tbody>
             </table>
