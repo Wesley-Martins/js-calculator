@@ -8,9 +8,9 @@
     background-color: $color-primary;
     border-radius: 5px;
     display: block;
-    padding: 8px;
+    padding: 8px 8px 12px 8px;
     position: absolute;
-    width: 85%;
+    width: 100%;
     &__top {
         display: flex;
         justify-content: space-between;
@@ -37,7 +37,7 @@
         display: flex;
         gap: 1rem;
         margin-top: 10px;
-        .operation {
+        .historic__operation {
             border: 1px solid whitesmoke;
             padding: 2px 5px;
         }

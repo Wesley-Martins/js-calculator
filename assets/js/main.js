@@ -6,6 +6,16 @@ const clearDigitBtn = document.getElementById("delete-btn");
 const equalBtn = document.getElementById("equal-btn");
 const total = document.getElementById("total");
 
+const historicBtn = document.getElementById("historic-btn");
+const historic = document.querySelector(".historic");
+const historicDeleteBtn = document.getElementById("historic__delete-btn");
+const historicList = document.querySelector(".historic__list");
+
+var previousOperations = JSON.parse(localStorage.getItem("previousOperations")) || [];
+previousOperations.forEach(item => { 
+    createHistoricItem(item) 
+});
+
 const MAX_CHAR_LENGTH = 10;
 
 var numbersList = [];
@@ -112,6 +122,12 @@ function clearLastDigit() {
     }
 }
 
+function clearHistoric() {
+    historicList.innerHTML = '';
+    previousOperations = [];
+    localStorage.setItem("previousOperations", JSON.stringify(previousOperations));
+}
+
 function generateResult() {
     if(operatorsList.length === 1 && numbersList[1] != "") {
 
@@ -138,12 +154,41 @@ function generateResult() {
         eval(total.innerHTML.replace(/x/g, "*").replace(/÷/g, "/").replace(/%/g, "/100"));
     }
 
-    if (result) {
+    if(result != null) {
+        result = result.toString().includes(".") ? result.toFixed(3) : result;
+
+        lastOperation = {
+            'operation': total.innerHTML,
+            'result': result
+        };
+        previousOperations.push(lastOperation);
+        localStorage.setItem("previousOperations", JSON.stringify(previousOperations));
+        createHistoricItem(lastOperation);
+
         //Limpa todas as variáveis para o uso na próxima operação
         clearAll();
-        result = result.toString().includes(".") ? result.toFixed(3) : result;
         total.innerHTML = result;
     }
+}
+
+function createHistoricItem(lastOperation) {
+    if(historicList.childElementCount + 1 > 10) { clearHistoric() };
+
+    const item = document.createElement("li");
+    item.classList.add("historic__item");
+
+    const itemOperation = document.createElement("div");
+    itemOperation.classList.add("historic__operation");
+    itemOperation.innerHTML = lastOperation.operation;
+
+    const itemResult = document.createElement("div");
+    itemResult.classList.add("historic__operation");
+    itemResult.innerHTML = lastOperation.result;
+
+    item.appendChild(itemOperation);
+    item.innerHTML += '=';
+    item.appendChild(itemResult);
+    historicList.appendChild(item);
 }
 
 for(let i = 0; i < numberBtns.length; i++) {
@@ -154,12 +199,15 @@ for(let i = 0; i < operatorBtns.length; i++) {
 }
 clearAllBtn.onclick = clearAll;
 clearDigitBtn.onclick = clearLastDigit;
+historicDeleteBtn.onclick = clearHistoric;
 equalBtn.onclick = generateResult;
 
-const historicBtn = document.getElementById("historic-btn");
-const historic = document.querySelector(".historic");
-
-historicBtn.addEventListener('click', () => {
-    console.log("oi?")
-    historic.classList.toggle("hidden");
+document.addEventListener('click', function(event) {
+    if([historicBtn, historicBtn.firstElementChild].includes(event.target)){
+        historic.classList.remove("hidden");
+        return
+    }
+    else if(!historic.classList.contains("hidden") && !historic.contains(event.target)) {
+        historic.classList.add("hidden");
+    }
 })
