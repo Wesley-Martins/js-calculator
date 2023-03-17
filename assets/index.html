@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="./images/icons/calculator-icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Calculator</title>
@@ -19,7 +19,7 @@
                 <div class="historic hidden">
                     <div class="historic__top">
                         <div>
-                            <i class="historic__clock-icon  icon"></i>
+                            <i class="historic__clock-icon icon"></i>
                         </div>
                         <button id="historic__delete-btn">
                             <i class="historic__delete-icon icon"></i>
@@ -39,37 +39,38 @@
                 </div>
             </section>
             <table>
-                <tbody class="btns-table">
-                    <tr class="btns-table__row">
-                        <td><button class="btn" data-num="7">7</button></td>
-                        <td><button class="btn" data-num="8">8</button></td>
-                        <td><button class="btn" data-num="9">9</button></td>
-                        <td><button class="btn" data-operator="x">x</button></td>
-                        <td><button class="btn" id="clear-all">AC</button></td>
+                <tbody class="keyboard">
+                    <tr class="keyboard__row">
+                        <td><button class="keyboard__btn" data-num="7">7</button></td>
+                        <td><button class="keyboard__btn" data-num="8">8</button></td>
+                        <td><button class="keyboard__btn" data-num="9">9</button></td>
+                        <td><button class="keyboard__btn" data-operator="x">x</button></td>
+                        <td><button class="keyboard__btn" id="clear-all">AC</button></td>
                     </tr>
-                    <tr class="btns-table__row">
-                        <td><button class="btn" data-num="4">4</button></td>
-                        <td><button class="btn" data-num="5">5</button></td>
-                        <td><button class="btn" data-num="6">6</button></td>
-                        <td><button class="btn" data-operator="-">-</button></td>
-                        <td><button class="btn" data-operator="%">%</button></td>
+                    <tr class="keyboard__row">
+                        <td><button class="keyboard__btn" data-num="4">4</button></td>
+                        <td><button class="keyboard__btn" data-num="5">5</button></td>
+                        <td><button class="keyboard__btn" data-num="6">6</button></td>
+                        <td><button class="keyboard__btn" data-operator="-">-</button></td>
+                        <td><button class="keyboard__btn" data-operator="%">%</button></td>
                     </tr>
-                    <tr class="btns-table__row">
-                        <td><button class="btn" data-num="1">1</button></td>
-                        <td><button class="btn" data-num="2">2</button></td>
-                        <td><button class="btn" data-num="3">3</button></td>
-                        <td><button class="btn" data-operator="+">+</button></td>
-                        <td><button class="btn" data-operator="÷">÷</button></td>
+                    <tr class="keyboard__row">
+                        <td><button class="keyboard__btn" data-num="1">1</button></td>
+                        <td><button class="keyboard__btn" data-num="2">2</button></td>
+                        <td><button class="keyboard__btn" data-num="3">3</button></td>
+                        <td><button class="keyboard__btn" data-operator="+">+</button></td>
+                        <td><button class="keyboard__btn" data-operator="÷">÷</button></td>
                     </tr>
-                    <tr class="btns-table__row">
-                        <td><button class="btn" data-num="0">0</button></td>
-                        <td><button class="btn" data-num=".">.</button></td>
-                        <td id="equal-btn-container"><button class="btn" id="equal-btn">=</button></td>
+                    <tr class="keyboard__row">
+                        <td><button class="keyboard__btn" data-num="0">0</button></td>
+                        <td><button class="keyboard__btn" data-num=".">.</button></td>
+                        <td id="equal-btn-container"><button class="keyboard__btn" id="equal-btn">=</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/historic.js" type="module"></script>
 </body>
 </html>

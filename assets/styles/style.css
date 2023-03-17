@@ -2,7 +2,7 @@ main {
   align-items: center;
   background: #110B1A;
   display: grid;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Lato", monospace;
   min-height: 100vh;
   padding: 5px;
 }
@@ -64,41 +64,42 @@ main {
 .calculator table {
   height: 100%;
 }
-.calculator .btns-table {
+.calculator .keyboard {
   display: grid;
   height: 100%;
 }
-.calculator .btns-table__row {
+.calculator .keyboard__row {
   align-items: center;
   -moz-column-gap: 12px;
        column-gap: 12px;
   display: flex;
   justify-content: space-between;
 }
-.calculator .btns-table td {
+.calculator .keyboard td {
   flex-basis: 100%;
 }
-.calculator .btns-table .btn {
+.calculator .keyboard__btn {
   background: #110B1A;
   border: none;
   border-radius: 10px;
-  box-shadow: 3px 3px black;
+  box-shadow: 0px 4px black;
   color: #47EDCB;
   cursor: pointer;
+  font-size: 1.2rem;
   height: 55px;
   width: 100%;
 }
-.calculator .btns-table .btn:active {
+.calculator .keyboard__btn:active {
   box-shadow: none;
-  transform: translate(3px, 3px);
+  transform: translateY(4px);
 }
-.calculator .btns-table .btn:focus-visible {
+.calculator .keyboard__btn:focus-visible {
   outline: 1px solid #47EDCB;
 }
-.calculator .btns-table #equal-btn-container {
+.calculator .keyboard #equal-btn-container {
   flex-basis: 135%;
 }
-.calculator .btns-table #clear-all {
+.calculator .keyboard #clear-all {
   color: rgb(188, 40, 40);
 }
 
@@ -109,8 +110,9 @@ main {
 .historic {
   background-color: #110B1A;
   border-radius: 5px;
+  border: 2px solid #FCF6FF;
   display: block;
-  padding: 8px 8px 12px 8px;
+  padding: 8px;
   position: absolute;
   width: 100%;
 }
