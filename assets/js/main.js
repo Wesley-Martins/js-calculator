@@ -111,6 +111,7 @@ function clearLastDigit() {
 }
 
 function generateResult() {
+    if(operators.length < 1) { return };
     if(operators.length === 1 && numbers[1] != "") {
 
        const num1 = parseFloat(numbers[0]);
