@@ -62,16 +62,15 @@ main {
   background-image: url(../images/icons/delete-icon.svg);
 }
 .calculator table {
-  height: 100%;
+  display: grid;
 }
 .calculator .keyboard {
   display: grid;
-  height: 100%;
+  padding-top: 4px;
 }
 .calculator .keyboard__row {
   align-items: center;
-  -moz-column-gap: 12px;
-       column-gap: 12px;
+  gap: 10px;
   display: flex;
   justify-content: space-between;
 }

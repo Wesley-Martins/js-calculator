@@ -66,15 +66,14 @@ main {
     }
 
     table {
-        height: 100%;
+        display: grid;
     }
     .keyboard {
         display: grid;
-        height: 100%;
-
+        padding-top: 4px;
         &__row {
             align-items: center;
-            column-gap: 12px;
+            gap: 10px;
             display: flex;
             justify-content: space-between;
         }
