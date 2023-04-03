@@ -12,21 +12,13 @@ previousOperations.forEach(item => {
 export function createHistoricItem(lastOperation) {
     if(historicList.childElementCount + 1 > 10) { clearHistoric() };
 
-    const operation = document.createElement("li");
-    operation.classList.add("historic__item");
-
-    const expression = document.createElement("div");
-    expression.classList.add("historic__operation");
-    expression.innerHTML = lastOperation.expression;
-
-    const result = document.createElement("div");
-    result.classList.add("historic__operation");
-    result.innerHTML = lastOperation.result;
-
-    operation.appendChild(expression);
-    operation.innerHTML += '=';
-    operation.appendChild(result);
-    historicList.appendChild(operation);
+    historicList.innerHTML += `
+        <li class="historic__item">
+            <div class="historic__operation">${lastOperation.expression}</div>
+            =
+            <div class="historic__operation">${lastOperation.result}</div>
+        </li>
+    `
 }
 
 function clearHistoric() {

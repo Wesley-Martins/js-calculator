@@ -15,7 +15,7 @@ var result = null;
 
 function addNumber(numberBtn) {
     if(result) {
-        if(total.innerHTML.at(-1) === operators ) {
+        if(operators.length > 0 && total.innerHTML.at(-1) == operators.at(-1)) {
             numbers[0] = result;
         }
         else {
@@ -32,7 +32,7 @@ function addNumber(numberBtn) {
     if(cannotAdd) {
         return 
     }
-    if(total.innerHTML.at(-1) === "%") {
+    if(total.innerHTML.at(-1) == '%') {
         operators += "x";
         total.innerHTML += "x";
     }
@@ -92,28 +92,32 @@ function clearLastDigit() {
     const lastDigit = total.innerHTML.at(-1);
     total.innerHTML = removeLastDigit(total.innerHTML);
 
-    switch(lastDigit) {
-        case operators.at(-1):
-            operators = removeLastDigit(operators);
-            break;
-
-        case numbers.at(-1).at(-1):
-            numbers[numbers.length -1] = numbers.at(-1).slice(0, -1);
-            if(numbers.at(-1) === "") {
-                numbers.pop();
+    switch(true) {
+        case operators.length > 0:
+            if(operators.at(-1) == lastDigit) {
+                operators = removeLastDigit(operators);
+                break;    
             }
-            break;
 
-        default: if(result) { 
-            result = removeLastDigit(toString(result)); 
-        }
+        case numbers.length > 0:
+            if(numbers.at(-1).at(-1) == lastDigit) {
+                numbers[numbers.length -1] = numbers.at(-1).slice(0, -1);
+                if(numbers.at(-1) === "") {
+                    numbers.pop();
+                }
+                break;
+            }
+        default:
+            if(result) {
+                result = removeLastDigit(result.toString());
+            }
     }
 }
 
 function generateResult() {
     if(operators.length < 1) { return };
-    if(operators.length === 1 && numbers[1] != "") {
-
+    if(operators.length === 1) {
+        if(!numbers[1]) { return };
        const num1 = parseFloat(numbers[0]);
        const num2 = parseFloat(numbers[1]);
        const operator = operators;
@@ -138,6 +142,7 @@ function generateResult() {
 
     if(result != null) {
         result = result.toString();
+
         if(result.includes('.')) {
             result = parseFloat(result).toFixed(3);
             while(result.endsWith('0')) {
